@@ -1,5 +1,9 @@
 #1. Pel·lícules i Idiomes:
+<<<<<<< HEAD
 - Selecciona el títol de la pel·lícula (film.title) i el nom de l'idioma (language.name).
+=======
+#Selecciona el títol de la pel·lícula (film.title) i el nom de l'idioma (language.name).
+>>>>>>> origin/Introduccion-a-la-clausula-JOIN
 
 Select f.title as “Titol”, l.name as “Idioma”
 From film f join language l on f.language_id = l.language_id;
@@ -7,7 +11,11 @@ From film f join language l on f.language_id = l.language_id;
 -------------------------------------------------------------------------------------------
 
 #2. Ciutats i Països:
+<<<<<<< HEAD
 Selecciona el nom de la ciutat (city.city) i el nom del país al qual pertany (country.country).
+=======
+#Selecciona el nom de la ciutat (city.city) i el nom del país al qual pertany (country.country).
+>>>>>>> origin/Introduccion-a-la-clausula-JOIN
 
 Select city.city, country.country
 From city 
@@ -16,7 +24,11 @@ Join country on city.country id = country.country_id;
 -------------------------------------------------------------------------------------------
 
 #3. Adreces i Ciutats:
+<<<<<<< HEAD
 Selecciona l'adreça (address.address) i el nom de la ciutat (city.city) de la taula address.
+=======
+#Selecciona l'adreça (address.address) i el nom de la ciutat (city.city) de la taula address.
+>>>>>>> origin/Introduccion-a-la-clausula-JOIN
 
 Select a.address, c.city
 From a.address as “Adreça”, c.city as “Ciutat”
@@ -25,7 +37,11 @@ From address a join city c on a.city_id = c.city_id;
 -------------------------------------------------------------------------------------------
 
 #4. Clients i Adreces:
+<<<<<<< HEAD
 Selecciona el nom i cognom del client (customer) i la seva adreça (address).
+=======
+#Selecciona el nom i cognom del client (customer) i la seva adreça (address).
+>>>>>>> origin/Introduccion-a-la-clausula-JOIN
 
 Select c.first_name, c.last_name, a.address
 From customer c
