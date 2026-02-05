@@ -1,4 +1,4 @@
-#1.Pel·lícules i Idiomes:
+#Pel·lícules i Idiomes:
 
 - Selecciona el títol de la pel·lícula (film.title) i el nom de l'idioma (language.name).
 ```
