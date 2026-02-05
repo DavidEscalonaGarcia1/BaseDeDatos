@@ -1,4 +1,6 @@
-# 1) Pel·lícules i Idiomes:
+# Nivell 1: Unions directes (2 taules)
+
+## 1) Pel·lícules i Idiomes:
 
 - Selecciona el títol de la pel·lícula (film.title) i el nom de l'idioma (language.name).
 
@@ -10,7 +12,7 @@ From film f join language l on f.language_id = l.language_id;
 ```
 -------------------------------------------------------------------------------------------
 
-# 2) Ciutats i Països:
+## 2) Ciutats i Països:
 
 - Selecciona el nom de la ciutat (city.city) i el nom del país al qual pertany (country.country).
 
@@ -26,7 +28,7 @@ Join country on city.country id = country.country_id;
 
 -------------------------------------------------------------------------------------------
 
-# 3) Adreces i Ciutats:
+## 3) Adreces i Ciutats:
 
 - Selecciona l'adreça (address.address) i el nom de la ciutat (city.city) de la taula address.
 
@@ -42,7 +44,7 @@ From address a join city c on a.city_id = c.city_id;
 
 -------------------------------------------------------------------------------------------
 
-# 4) Clients i Adreces:
+## 4) Clients i Adreces:
 
 - Selecciona el nom i cognom del client (customer) i la seva adreça (address).
 
@@ -58,7 +60,7 @@ Join address a ON c.address_id = a.address_id;
 
 -------------------------------------------------------------------------------------------
 
-# 5) Empleats i Adreces:
+## 5) Empleats i Adreces:
 
 - Selecciona el nom de l'empleat (staff) i la seva adreça.
 
@@ -71,7 +73,7 @@ From staff join address on staff.address_id = address.address_id;
 
 -------------------------------------------------------------------------------------------
 
-# 6) Pel·lícules en anglès:
+## 6) Pel·lícules en anglès:
 
 - Mostra els títols de les pel·lícules, però només aquelles on l'idioma sigui 'English'.
 
@@ -84,7 +86,7 @@ From file inner join language on film.language_id = language.language_id;
 
 -------------------------------------------------------------------------------------------
 
-# 7) Pagaments i Clients:
+## 7) Pagaments i Clients:
 
 - Mostra la data del pagament (payment_date) i l'import (amount), juntament amb el nom complet del client que l'ha fet.
 
@@ -97,7 +99,7 @@ From payment join customer on payment.customer_id = customer.customer_id;
 
 -------------------------------------------------------------------------------------------
 
-# 8) Inventari i Pel·lícules:
+## 8) Inventari i Pel·lícules:
 
 - Mostra l'ID de l'inventari (inventory_id) i el títol de la pel·lícula que correspon a aquest ítem.
 
@@ -110,7 +112,7 @@ From inventory join film on film.film_id = inventory.film_id;
 
 -------------------------------------------------------------------------------------------
 
-# 9) Lloguers i Empleats:
+## 9) Lloguers i Empleats:
 
 - Mostra l'ID del lloguer (rental_id) i el nom de l'empleat (staff) que va processar el lloguer.
 
@@ -123,7 +125,7 @@ From rental join staff on rental.staff_id = staff.staff_id;
 
 -------------------------------------------------------------------------------------------
 
-# 10) Clients i Botigues:
+## 10) Clients i Botigues:
 
 - Mostra el nom del client i l'ID de la botiga (store_id) a la qual està assignat, però assegura't de mostrar l'adreça de la botiga (necessitaràs unir customer i store, i després store i address).
 ###### Versió 1: Mostra només la relació del client amb la botiga
@@ -133,7 +135,7 @@ From rental join staff on rental.staff_id = staff.staff_id;
 - Versió 10.1
 
 ```
-Se`ect first_name, store_id
+Select first_name, store_id
 ```
 ```
 From customer;
@@ -174,7 +176,9 @@ Join address adreca_botiga on st.address_id = adreca.address_id;
 
 -------------------------------------------------------------------------------------------
 
-# 11) Pel·lícules i Categories:
+# Nivell 2: Camins de 3 taules o taules intermèdies
+
+## 11) Pel·lícules i Categories:
 
 - Mostra el títol de la pel·lícula i el nom de la seva categoria (category.name). Pista: film -> film_category -> category.
 
@@ -193,7 +197,7 @@ Join category on film_category.category_id = category.category_id;
 
 -------------------------------------------------------------------------------------------
 
-# 12) Pel·lícules i Actors:
+## 12) Pel·lícules i Actors:
 
 - Mostra el títol de la pel·lícula i el nom i cognom dels actors que hi surten. Pista: film -> film_actor -> actor.
 
@@ -212,7 +216,7 @@ Join actor a on fa.actor_id = a.actor_id;
 
 -------------------------------------------------------------------------------------------
 
-# 13) Clients i Ciutats:
+## 13) Clients i Ciutats:
 
 - Volem saber de quina ciutat és cada client. Mostra el nom del client i la ciutat. Pista: customer -> address -> city.
 
@@ -231,7 +235,7 @@ Join city.ci ON a.city_id = ci.city_id;
 
 -------------------------------------------------------------------------------------------
 
-# 14) Inventari, Pel·lícula i Botiga:
+## 14) Inventari, Pel·lícula i Botiga:
 
 - Mostra l'ID de l'inventari, el títol de la pel·lícula i l'ID de la botiga on es troba.
 
@@ -244,5 +248,105 @@ From inventory i
 ```
 Join film f ON i.film_id = f.film_id;
 ```
+
+-------------------------------------------------------------------------------------------
+
+## 15) Lloguers detallats (Client):
+
+- Mostra la data de lloguer, el títol de la pel·lícula llogada i el nom del client. Pista: rental -> inventory -> film (per al títol) i rental -> customer (per al client).
+
+-------------------------------------------------------------------------------------------
+
+# Nivell 3: Múltiples Joins i Lògica de Negoci
+
+## 16) Clients i Països:
+
+- Volem un llistat dels clients indicant el seu país de residència. Mostra: Nom Client, País.
+
+-------------------------------------------------------------------------------------------
+
+## 17) Actors de "ACADEMY DINOSAUR":
+
+- Mostra només els noms dels actors que han actuat a la pel·lícula titulada "ACADEMY DINOSAUR".
+
+-------------------------------------------------------------------------------------------
+
+## 18) Qui ha llogat què? (Filtre per nom):
+
+- Mostra els títols de les pel·lícules que ha llogat la clienta 'MARY SMITH'.
+
+-------------------------------------------------------------------------------------------
+
+## 19) Pagaments detallats:
+
+- Mostra la data del pagament, l'import, el nom del client i el nom de l'empleat que ha cobrat.
+
+-------------------------------------------------------------------------------------------
+
+## 20) Informació completa de la Botiga:
+
+- Mostra l'ID de la botiga, la ciutat on està i el país.
+
+-------------------------------------------------------------------------------------------
+
+# Nivell 4: LEFT JOIN i RIGHT JOIN
+
+## 21) Totes les películes i si son a l'inventari (LEFT JOIN)
+
+- Volem una llista de totes les pel·lícules i, si en tenim còpies, el seu ID d'inventari. Si no en tenim, volem que surti la pel·lícula igualment amb un NULL.
+
+-------------------------------------------------------------------------------------------
+
+## 22) Tots els idiomes i les seves pel·lícules (RIGHT JOIN).
+
+- Volem llistar tots els idiomes disponibles a la base de dades i el títol de les pel·lícules associades. Fes servir RIGHT JOIN amb la taula d'idiomes a la dreta. Si per un idioma no hi han pel.lícules, s'ha de mostrar l'idioma i un NULL
+
+-------------------------------------------------------------------------------------------
+
+## 23) Actors i les seves pel·lícules (LEFT JOIN).
+
+- Llista tots els actors i l'ID de les pel·lícules que han fet. Encara que a Pagila tots els actors han treballat, aquesta consulta és la manera correcta de verificar si tenim algun actor "a l'atur".
+
+-------------------------------------------------------------------------------------------
+
+## 24) Inventari i Lloguers (LEFT JOIN).
+
+- Mostra tot l'inventari (cintes físiques) i l'ID del lloguer si està llogada. Volem veure totes les cintes, fins i tot les que mai s'han llogat (o l'historial de lloguer).
+
+-------------------------------------------------------------------------------------------
+
+## 25) Comparativa: Pel·lícules sense inventari (RIGHT JOIN).
+
+- Repeteix l'exercici 1 (pel·lícules i inventari) però utilitzant RIGHT JOIN. Posa inventory a l'esquerra i film a la dreta.
+
+-------------------------------------------------------------------------------------------
+
+## 26) Troba les pel·lícules que NO tenim a l'inventari.
+
+- Utilitza un LEFT JOIN i filtra amb WHERE per mostrar només els títols que tenen l'ID d'inventari a NULL.
+
+-------------------------------------------------------------------------------------------
+
+## 27) Compta quantes pel·lícules ens falten a l'inventari.
+
+- En lloc de llistar els títols, volem saber la xifra total de pel·lícules que consten a la base de dades però no tenim físicament.
+
+-------------------------------------------------------------------------------------------
+
+## 28) Troba idiomes sense pel·lícules (RIGHT JOIN + WHERE).
+
+- Mostra els noms dels idiomes que no tenen cap pel·lícula associada a la base de dades.
+
+-------------------------------------------------------------------------------------------
+
+## 29) Suma del cost de reemplaçament de les pel·lícules "perdudes".
+
+- Volem saber quants diners representaria (segons replacement_cost) si haguéssim de comprar una còpia de totes les pel·lícules que actualment no tenim a l'inventari.
+
+-------------------------------------------------------------------------------------------
+
+## 30) Llistar pel·lícules 'G' que NO estan a l'inventari (Filtre compost).
+
+- Volem títols de pel·lícules que siguin aptes per a tots els públics (rating = 'G') I que, a més a més, no tinguem a l'inventari.
 
 -------------------------------------------------------------------------------------------
