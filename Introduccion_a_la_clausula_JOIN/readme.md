@@ -1,4 +1,4 @@
-#1. Pel·lícules i Idiomes:
+1. #Pel·lícules i Idiomes:
 
 - Selecciona el títol de la pel·lícula (film.title) i el nom de l'idioma (language.name).
 ```
@@ -9,23 +9,34 @@ From film f join language l on f.language_id = l.language_id;
 ```
 -------------------------------------------------------------------------------------------
 
-#2. Ciutats i Països:
+2. #Ciutats i Països:
 
 - Selecciona el nom de la ciutat (city.city) i el nom del país al qual pertany (country.country).
-
+```
 Select city.city, country.country
+```
+```
 From city 
+```
+```
 Join country on city.country id = country.country_id;
+```
 
 -------------------------------------------------------------------------------------------
 
-#3. Adreces i Ciutats:
+3. #Adreces i Ciutats:
 
 - Selecciona l'adreça (address.address) i el nom de la ciutat (city.city) de la taula address.
 
+```
 Select a.address, c.city
+```
+```
 From a.address as “Adreça”, c.city as “Ciutat”
+```
+```
 From address a join city c on a.city_id = c.city_id;
+```
 
 -------------------------------------------------------------------------------------------
 
