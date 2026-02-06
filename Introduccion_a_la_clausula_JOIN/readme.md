@@ -10,6 +10,7 @@ Select f.title as “Titol”, l.name as “Idioma”
 ```
 From film f join language l on f.language_id = l.language_id;
 ```
+
 -------------------------------------------------------------------------------------------
 
 ## 2) Ciutats i Països:
@@ -255,6 +256,22 @@ Join film f ON i.film_id = f.film_id;
 
 - Mostra la data de lloguer, el títol de la pel·lícula llogada i el nom del client. Pista: rental -> inventory -> film (per al títol) i rental -> customer (per al client).
 
+```
+Select rental.rental_date, film.title, customer.first_name, customer.last_name
+```
+```
+From rental
+```
+```
+Join inventory on rental.inventory_id = inventory.inventory_id
+```
+```
+Join film on inventory.film id = film.film=id
+```
+```
+Join customer on rental.customer_id = customer.customer_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 # Nivell 3: Múltiples Joins i Lògica de Negoci
@@ -263,11 +280,43 @@ Join film f ON i.film_id = f.film_id;
 
 - Volem un llistat dels clients indicant el seu país de residència. Mostra: Nom Client, País.
 
+```
+Select customer.firat_name, customer.last_name, country .country
+```
+```
+From customer
+```
+```
+Join address on customer.address_id = address_id = address.address_id
+```
+```
+Join city on addres.city_id = city.city_id
+```
+```
+Join country on city.country_id = country.country_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 17) Actors de "ACADEMY DINOSAUR":
 
 - Mostra només els noms dels actors que han actuat a la pel·lícula titulada "ACADEMY DINOSAUR".
+
+```
+Select actor.firt_name, actor.last_name, film.title
+```
+```
+From actor
+```
+```
+Join film_actor on actor.actor_id = film_actor.actor_id
+```
+```
+Join film on film_actor.film_id =film.film_id;
+```
+```
+Where film.title='ACADEMY DINOSAUR';
+```
 
 -------------------------------------------------------------------------------------------
 
@@ -275,17 +324,65 @@ Join film f ON i.film_id = f.film_id;
 
 - Mostra els títols de les pel·lícules que ha llogat la clienta 'MARY SMITH'.
 
+```
+Select f.title, cu.first_name, cu.last_name
+```
+```
+From rental r 
+```
+```
+Join inventory inv on r.inventory_id = inv.inventory_id 
+```
+```
+Join film on inv.film_id = f.film_id
+```
+```
+Join customer cu on rental.customer_id = cu.customer_id
+```
+```
+Where cu.first_name='MARY' and cu.last_name='SMITH';
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 19) Pagaments detallats:
 
 - Mostra la data del pagament, l'import, el nom del client i el nom de l'empleat que ha cobrat.
 
+```
+Select payment.payment_date, payment-amount, customer.first_name, customer.last_name, staff.first_name, staff_name
+```
+```
+From payment
+```
+```
+Join customer on payment.customer_id = customer.customer_id
+```
+```
+Join staff on payment.staff_id = staff.staff_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 20) Informació completa de la Botiga:
 
 - Mostra l'ID de la botiga, la ciutat on està i el país.
+
+```
+Select store.store_id, city.city, country.country
+```
+```
+From store
+```
+```
+Join address on store.address_id = address.address_id
+```
+```
+Join city ci on city.city_id = address.address_id
+```
+```
+Join country co on ci.country_id = co.country_id;
+```
 
 -------------------------------------------------------------------------------------------
 
@@ -295,11 +392,31 @@ Join film f ON i.film_id = f.film_id;
 
 - Volem una llista de totes les pel·lícules i, si en tenim còpies, el seu ID d'inventari. Si no en tenim, volem que surti la pel·lícula igualment amb un NULL.
 
+```
+Select f.title, i.inventory_id
+```
+```
+From film f
+```
+```
+Left Join inventory i on f.film_id = i.film_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 22) Tots els idiomes i les seves pel·lícules (RIGHT JOIN).
 
 - Volem llistar tots els idiomes disponibles a la base de dades i el títol de les pel·lícules associades. Fes servir RIGHT JOIN amb la taula d'idiomes a la dreta. Si per un idioma no hi han pel.lícules, s'ha de mostrar l'idioma i un NULL
+
+```
+Select f.title, l.name as language
+```
+```
+From films f
+```
+```
+Right Join language l on f.language_id = l.language_id; 
+```
 
 -------------------------------------------------------------------------------------------
 
@@ -307,11 +424,31 @@ Join film f ON i.film_id = f.film_id;
 
 - Llista tots els actors i l'ID de les pel·lícules que han fet. Encara que a Pagila tots els actors han treballat, aquesta consulta és la manera correcta de verificar si tenim algun actor "a l'atur".
 
+```
+Select a.actor_id, a.first_name, a.last_name, fpa.film_id
+```
+```
+From actor a
+```
+```
+Left Join film_actor fpa ON a.actor_id = fpa.actor_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 24) Inventari i Lloguers (LEFT JOIN).
 
 - Mostra tot l'inventari (cintes físiques) i l'ID del lloguer si està llogada. Volem veure totes les cintes, fins i tot les que mai s'han llogat (o l'historial de lloguer).
+
+```
+Select i.inventory_id, r.rental_id
+```
+```
+From inventory i
+```
+```
+Left Join rental r ON i.inventory_id = r.inventory_id;
+```
 
 -------------------------------------------------------------------------------------------
 
