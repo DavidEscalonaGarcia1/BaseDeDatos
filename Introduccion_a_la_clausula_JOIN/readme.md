@@ -456,11 +456,40 @@ Left Join rental r ON i.inventory_id = r.inventory_id;
 
 - Repeteix l'exercici 1 (pel·lícules i inventari) però utilitzant RIGHT JOIN. Posa inventory a l'esquerra i film a la dreta.
 
+```
+SELECT f.title AS "Titol", l.name AS "Idioma"
+```
+```
+FROM inventory i
+```
+```
+RIGHT JOIN film f ON i.film_id = f.film_id
+```
+```
+JOIN language l ON f.language_id = l.language_id;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 26) Troba les pel·lícules que NO tenim a l'inventari.
 
 - Utilitza un LEFT JOIN i filtra amb WHERE per mostrar només els títols que tenen l'ID d'inventari a NULL.
+
+```
+SELECT f.title AS "Titol", l.name AS "Idioma"
+```
+```
+FROM film f
+```
+```
+LEFT JOIN inventory i ON f.film_id = i.film_id
+```
+```
+JOIN language l ON f.language_id = l.language_id
+```
+```
+WHERE i.inventory_id IS NULL;
+```
 
 -------------------------------------------------------------------------------------------
 
@@ -468,11 +497,38 @@ Left Join rental r ON i.inventory_id = r.inventory_id;
 
 - En lloc de llistar els títols, volem saber la xifra total de pel·lícules que consten a la base de dades però no tenim físicament.
 
+```
+SELECT COUNT(*) AS peliculas
+```
+```
+FROM film f
+```
+```
+LEFT JOIN inventory i ON f.film_id = i.film_id
+```
+```
+WHERE i.inventory_id IS NULL;
+```
+
+
 -------------------------------------------------------------------------------------------
 
 ## 28) Troba idiomes sense pel·lícules (RIGHT JOIN + WHERE).
 
 - Mostra els noms dels idiomes que no tenen cap pel·lícula associada a la base de dades.
+
+```
+SELECT l.name AS "Idioma"
+```
+```
+FROM language l
+```
+```
+LEFT JOIN film f ON l.language_id = f.language_id
+```
+```
+WHERE f.film_id IS NULL;
+```
 
 -------------------------------------------------------------------------------------------
 
@@ -480,10 +536,39 @@ Left Join rental r ON i.inventory_id = r.inventory_id;
 
 - Volem saber quants diners representaria (segons replacement_cost) si haguéssim de comprar una còpia de totes les pel·lícules que actualment no tenim a l'inventari.
 
+```
+SELECT SUM(f.replacement_cost) AS costo_total
+```
+```
+FROM film f
+```
+```
+LEFT JOIN inventory i ON f.film_id = i.film_id
+```
+```
+WHERE i.inventory_id IS NULL;
+```
+
 -------------------------------------------------------------------------------------------
 
 ## 30) Llistar pel·lícules 'G' que NO estan a l'inventari (Filtre compost).
 
 - Volem títols de pel·lícules que siguin aptes per a tots els públics (rating = 'G') I que, a més a més, no tinguem a l'inventari.
+
+```
+SELECT f.title AS "Titol"
+```
+```
+FROM film f
+```
+```
+LEFT JOIN inventory i ON f.film_id = i.film_id
+```
+```
+WHERE f.rating = 'G'
+```
+```
+AND i.inventory_id IS NULL;
+```
 
 -------------------------------------------------------------------------------------------
