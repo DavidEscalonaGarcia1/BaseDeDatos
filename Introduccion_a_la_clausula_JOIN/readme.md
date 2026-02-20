@@ -572,3 +572,35 @@ AND i.inventory_id IS NULL;
 ```
 
 -------------------------------------------------------------------------------------------
+
+# Nivell 5: Expressions
+
+## 31) Expressió de cadena: Llistar el nom complet dels actors en una unica columna.
+
+- Volem el nom complet dels actors (first_name i last_name) en una unica columna que es digui "Nom actor".
+
+```
+
+```
+
+-------------------------------------------------------------------------------------------
+
+## 32) Expressió aritmética: Llistar la duració de les películes en hores.
+
+- Volem mostrar la duració de les películes en hores en comptes de en minuts. El resultat ha de mostrar-se amb una precissió de 2 decimals i la columna s'ha de dir "Hores duració".
+
+```
+
+```
+
+-------------------------------------------------------------------------------------------
+
+## 33) Expressió de cadena: Llistar el nom complet dels actors en una unica columna
+
+- Volem mostrar una nova columna, anomenada "Etiqueta preu", que ens mostri:
+
+```
+
+```
+
+-------------------------------------------------------------------------------------------
