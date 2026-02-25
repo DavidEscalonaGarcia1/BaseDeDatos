@@ -580,7 +580,13 @@ AND i.inventory_id IS NULL;
 - Volem el nom complet dels actors (first_name i last_name) en una unica columna que es digui "Nom actor".
 
 ```
-
+CREATE VIEW vista_nom_complet_actors AS
+```
+```
+SELECT CONCAT(first_name, ' ', last_name) AS "Nom actor"
+```
+```
+FROM actor;
 ```
 
 -------------------------------------------------------------------------------------------
@@ -590,7 +596,13 @@ AND i.inventory_id IS NULL;
 - Volem mostrar la duració de les películes en hores en comptes de en minuts. El resultat ha de mostrar-se amb una precissió de 2 decimals i la columna s'ha de dir "Hores duració".
 
 ```
-
+CREATE VIEW vista_duracio_hores AS
+```
+```
+SELECT ROUND(length / 60, 2) AS "Hores duració"
+```
+```
+FROM film;
 ```
 
 -------------------------------------------------------------------------------------------
@@ -600,7 +612,67 @@ AND i.inventory_id IS NULL;
 - Volem mostrar una nova columna, anomenada "Etiqueta preu", que ens mostri:
 
 ```
-
+CREATE VIEW vista_etiqueta_preu AS
+```
+```
+SELECT title, rental_rate
+```
+```
+CASE
+    WHEN rental_rate < 1.00 THEN 'Ofertón'
+    WHEN rental_rate BETWEEN 1.00 AND 3.00 THEN 'Preu amic'
+    WHEN rental_rate > 3.00 THEN 'Premium'
+END AS "Etiqueta preu"
+```
+```
+FROM film;
 ```
 
+-------------------------------------------------------------------------------------------
+
+# Nivell 6: Subconsultes
+
+## 34) Películes més cares de reemplaçar que la mitja
+
+- Volem trobar la llista de películes que son més cares de reemplaçar que la mitja.
+
+```
+CREATE VIEW vista_pelicules_replacement_superior_mitja AS
+```
+```
+SELECT title, replacement_cost
+```
+```
+FROM film
+```
+```
+WHERE replacement_cost > (SELECT AVG(replacement_cost) FROM film );
+```
+
+-------------------------------------------------------------------------------------------
+
+## 35) Actors d'un film en concret sense fer servir JOIN
+
+- Volem llistar el nom de tots els actors que van actuar a ACADEMY DINOSAUR pero sense fer servir joins.
+
+```
+CREATE VIEW vista_actors_academy_dinosaur AS
+```
+```
+SELECT CONCAT(first_name, ' ', last_name) AS "Nom actor"
+```
+```
+FROM actor
+```
+```
+WHERE actor_id IN (
+    SELECT actor_id
+    FROM film_actor
+    WHERE film_id = (
+        SELECT film_id
+        FROM film
+        WHERE title = 'ACADEMY DINOSAUR'
+    )
+);
+```
 -------------------------------------------------------------------------------------------
